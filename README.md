@@ -50,7 +50,7 @@ To build the layers locally:
 
 1. Clone this repository:
 ```bash
-git clone [REPOSITORY_URL]
+git clone https://github.com/tunnelhub/better-sqlite3-lambda-layer
 ```
 
 2. Ensure Docker is installed
