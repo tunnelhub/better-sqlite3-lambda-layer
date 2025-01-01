@@ -1,0 +1,6 @@
+.serverless/
+layer/
+node_modules/
+build/
+.idea
+/better-sqlite3-layer.zip

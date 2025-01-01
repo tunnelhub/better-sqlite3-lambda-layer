@@ -1,0 +1,31 @@
+FROM public.ecr.aws/lambda/nodejs:18
+
+# Habilitar repositórios extras e instalar GCC 10
+RUN yum update -y && \
+    yum install -y gcc-c++ make python3 zip && \
+    yum install -y gcc10-c++ && \
+    yum clean all && \
+    rm -rf /var/cache/yum
+
+# Configurar GCC 10 como compilador padrão
+ENV CC=gcc10-gcc \
+    CXX=gcc10-g++ \
+    CXXFLAGS="-std=c++20"
+
+# Copiar arquivos do projeto
+WORKDIR /layer
+COPY package.json ./
+
+# Instalar dependências
+RUN npm install
+
+# Organizar arquivos conforme estrutura da Lambda Layer
+RUN mkdir -p /opt/nodejs/node18/
+RUN cp -r node_modules /opt/nodejs/node18/
+
+# Criar arquivo ZIP do layer
+RUN cd /opt && zip -r9 /layer/better-sqlite3-layer-node18.zip .
+
+# Sobrescrever o ENTRYPOINT da imagem base
+ENTRYPOINT []
+CMD ["/bin/bash"]

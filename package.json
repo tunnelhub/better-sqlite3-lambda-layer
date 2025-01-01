@@ -1,0 +1,7 @@
+{
+  "name": "better-sqlite3-layer",
+  "version": "1.0.0",
+  "dependencies": {
+    "better-sqlite3": "^11.7.0"
+  }
+}
