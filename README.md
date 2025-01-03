@@ -2,28 +2,22 @@
 
 This repository contains the source code and scripts to build and publish AWS Lambda Layers for [better-sqlite3](https://github.com/WiseLibs/better-sqlite3) across different Node.js versions.
 
-## Available Layers
+## Available Versions
 
-### Node.js 18.x
-Available in these regions:
-- us-east-1: `arn:aws:lambda:us-east-1:521944920347:layer:better-sqlite3-node18:1`
-- us-east-2: `arn:aws:lambda:us-east-2:521944920347:layer:better-sqlite3-node18:1`
-- us-west-1: `arn:aws:lambda:us-west-1:521944920347:layer:better-sqlite3-node18:1`
-- us-west-2: `arn:aws:lambda:us-west-2:521944920347:layer:better-sqlite3-node18:1`
-
-### Node.js 20.x
-Available in these regions:
-- us-east-1: `arn:aws:lambda:us-east-1:521944920347:layer:better-sqlite3-node20:1`
-- us-east-2: `arn:aws:lambda:us-east-2:521944920347:layer:better-sqlite3-node20:1`
-- us-west-1: `arn:aws:lambda:us-west-1:521944920347:layer:better-sqlite3-node20:1`
-- us-west-2: `arn:aws:lambda:us-west-2:521944920347:layer:better-sqlite3-node20:1`
-
-### Node.js 22.x
-Available in these regions:
-- us-east-1: `arn:aws:lambda:us-east-1:521944920347:layer:better-sqlite3-node22:1`
-- us-east-2: `arn:aws:lambda:us-east-2:521944920347:layer:better-sqlite3-node22:1`
-- us-west-1: `arn:aws:lambda:us-west-1:521944920347:layer:better-sqlite3-node22:1`
-- us-west-2: `arn:aws:lambda:us-west-2:521944920347:layer:better-sqlite3-node22:1`
+| Node.js Version | better-sqlite3 Version | Region | ARN |
+|----------------|----------------------|---------|-----|
+| Layer ARN for Node.js 18 in us-east-1: arn:aws:lambda:us-east-1:521944920347:layer:better-sqlite3-nodejs18:1.x | ^11.7.0 | us-east-1 | `arn:aws:lambda:us-east-1:521944920347:layer:better-sqlite3-nodejs18:1` |
+| Layer ARN for Node.js 18 in us-east-2: arn:aws:lambda:us-east-2:521944920347:layer:better-sqlite3-nodejs18:1.x | ^11.7.0 | us-east-2 | `arn:aws:lambda:us-east-2:521944920347:layer:better-sqlite3-nodejs18:1` |
+| Layer ARN for Node.js 18 in us-west-1: arn:aws:lambda:us-west-1:521944920347:layer:better-sqlite3-nodejs18:1.x | ^11.7.0 | us-west-1 | `arn:aws:lambda:us-west-1:521944920347:layer:better-sqlite3-nodejs18:1` |
+| Layer ARN for Node.js 18 in us-west-2: arn:aws:lambda:us-west-2:521944920347:layer:better-sqlite3-nodejs18:1.x | ^11.7.0 | us-west-2 | `arn:aws:lambda:us-west-2:521944920347:layer:better-sqlite3-nodejs18:1` |
+| Layer ARN for Node.js 20 in us-east-1: arn:aws:lambda:us-east-1:521944920347:layer:better-sqlite3-nodejs20:1.x | ^11.7.0 | us-east-1 | `arn:aws:lambda:us-east-1:521944920347:layer:better-sqlite3-nodejs20:1` |
+| Layer ARN for Node.js 20 in us-east-2: arn:aws:lambda:us-east-2:521944920347:layer:better-sqlite3-nodejs20:1.x | ^11.7.0 | us-east-2 | `arn:aws:lambda:us-east-2:521944920347:layer:better-sqlite3-nodejs20:1` |
+| Layer ARN for Node.js 20 in us-west-1: arn:aws:lambda:us-west-1:521944920347:layer:better-sqlite3-nodejs20:1.x | ^11.7.0 | us-west-1 | `arn:aws:lambda:us-west-1:521944920347:layer:better-sqlite3-nodejs20:1` |
+| Layer ARN for Node.js 20 in us-west-2: arn:aws:lambda:us-west-2:521944920347:layer:better-sqlite3-nodejs20:1.x | ^11.7.0 | us-west-2 | `arn:aws:lambda:us-west-2:521944920347:layer:better-sqlite3-nodejs20:1` |
+| Layer ARN for Node.js 22 in us-east-1: arn:aws:lambda:us-east-1:521944920347:layer:better-sqlite3-nodejs22:1.x | ^11.7.0 | us-east-1 | `arn:aws:lambda:us-east-1:521944920347:layer:better-sqlite3-nodejs22:1` |
+| Layer ARN for Node.js 22 in us-east-2: arn:aws:lambda:us-east-2:521944920347:layer:better-sqlite3-nodejs22:1.x | ^11.7.0 | us-east-2 | `arn:aws:lambda:us-east-2:521944920347:layer:better-sqlite3-nodejs22:1` |
+| Layer ARN for Node.js 22 in us-west-1: arn:aws:lambda:us-west-1:521944920347:layer:better-sqlite3-nodejs22:1.x | ^11.7.0 | us-west-1 | `arn:aws:lambda:us-west-1:521944920347:layer:better-sqlite3-nodejs22:1` |
+| Layer ARN for Node.js 22 in us-west-2: arn:aws:lambda:us-west-2:521944920347:layer:better-sqlite3-nodejs22:1.x | ^11.7.0 | us-west-2 | `arn:aws:lambda:us-west-2:521944920347:layer:better-sqlite3-nodejs22:1` |
 
 ## Usage
 
@@ -40,17 +34,13 @@ const db = new Database('/tmp/db.sqlite');
 
 - x86_64 (AMD64)
 
-## Versions
-
-- better-sqlite3: ^11.7.0
-
 ## Building Locally
 
 To build the layers locally:
 
 1. Clone this repository:
 ```bash
-git clone https://github.com/tunnelhub/better-sqlite3-lambda-layer
+git clone https://github.com/tunnelhub/better-sqlite3-lambda-layer.git
 ```
 
 2. Ensure Docker is installed
@@ -60,10 +50,10 @@ git clone https://github.com/tunnelhub/better-sqlite3-lambda-layer
 ./build.sh
 ```
 
-This will generate ZIP files for each Node.js version:
-- `better-sqlite3-layer-node18.zip`
-- `better-sqlite3-layer-node20.zip`
-- `better-sqlite3-layer-node22.zip`
+This will generate ZIP files in the `dist` directory for each Node.js version:
+- `better-sqlite3-layer-nodejs18.zip`
+- `better-sqlite3-layer-nodejs20.zip`
+- `better-sqlite3-layer-nodejs22.zip`
 
 ## Publishing to AWS
 
@@ -85,9 +75,9 @@ To publish the layers to AWS:
 ├── 📄 publish.sh
 ├── 📄 .nvmrc
 └── 📁 dockerfiles/
-    ├── 📄 Dockerfile.node18
-    ├── 📄 Dockerfile.node20
-    └── 📄 Dockerfile.node22
+    ├── 📄 Dockerfile.nodejs18
+    ├── 📄 Dockerfile.nodejs20
+    └── 📄 Dockerfile.nodejs22
 ```
 
 ## Contributing

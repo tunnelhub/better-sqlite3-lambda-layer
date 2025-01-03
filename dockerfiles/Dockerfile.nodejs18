@@ -20,11 +20,11 @@ COPY package.json ./
 RUN npm install
 
 # Organizar arquivos conforme estrutura da Lambda Layer
-RUN mkdir -p /opt/nodejs/node18/
-RUN cp -r node_modules /opt/nodejs/node18/
+RUN mkdir -p /opt/nodejs/
+RUN cp -r node_modules /opt/nodejs
 
 # Criar arquivo ZIP do layer
-RUN cd /opt && zip -r9 /layer/better-sqlite3-layer-node18.zip .
+RUN cd /opt && zip -r9 /layer/better-sqlite3-layer-nodejs18.zip .
 
 # Sobrescrever o ENTRYPOINT da imagem base
 ENTRYPOINT []

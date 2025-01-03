@@ -1,24 +1,28 @@
 #!/bin/bash -x
 
-# Versões do Node.js a serem construídas
+# Disable AWS CLI pager
+export AWS_PAGER=""
+
+# Create dist directory if it doesn't exist
+mkdir -p dist
+
 NODE_VERSIONS=("18" "20" "22")
 
-# Construir para cada versão
 for version in "${NODE_VERSIONS[@]}"; do
     echo "Building for Node.js ${version}..."
 
-    # Construir a imagem Docker
-    docker build -t better-sqlite3-builder:node${version} \
-        --file dockerfiles/Dockerfile.node${version} .
+    # Build the image
+    docker build -t better-sqlite3-builder:nodejs${version} \
+        --file dockerfiles/Dockerfile.nodejs${version} .
 
-    # Extrair o arquivo ZIP
-    docker run --rm -v $(pwd):/output \
-        better-sqlite3-builder:node${version} \
-        cp /layer/better-sqlite3-layer-node${version}.zip /output/
+    # Copy the ZIP file
+    docker run --rm -v $(pwd)/dist:/output \
+        better-sqlite3-builder:nodejs${version} \
+        cp /layer/better-sqlite3-layer-nodejs${version}.zip /output/
 
-    # Remover a imagem
-    docker rmi better-sqlite3-builder:node${version}
+    # Remove the image
+    docker rmi better-sqlite3-builder:nodejs${version}
 
-    # Listar o arquivo gerado
-    ls -lh better-sqlite3-layer-node${version}.zip
+    # List the generated file
+    ls -lh dist/better-sqlite3-layer-nodejs${version}.zip
 done
