@@ -5,7 +5,7 @@ RUN dnf install -y gcc-c++ make python3 zip
 
 # Copiar arquivos do projeto
 WORKDIR /layer
-COPY ../package.json ./
+COPY package.json ./
 
 # Instalar dependências
 RUN npm install
@@ -14,8 +14,20 @@ RUN npm install
 RUN mkdir -p /opt/nodejs/
 RUN cp -r node_modules /opt/nodejs/
 
-# Criar arquivo ZIP do layer
-RUN cd /opt && zip -r9 /layer/better-sqlite3-layer-nodejs20.zip .
+# Detect architecture and set it as an argument
+RUN arch=$(uname -m) && \
+    if [ "$arch" = "x86_64" ]; then \
+        echo "x86_64" > /tmp/arch; \
+    elif [ "$arch" = "aarch64" ]; then \
+        echo "arm64" > /tmp/arch; \
+    else \
+        echo "Unsupported architecture: $arch" && exit 1; \
+    fi
+
+# Criar arquivo ZIP do layer com nome baseado na arquitetura
+RUN cd /opt && \
+    ARCH=$(cat /tmp/arch) && \
+    zip -r9 /layer/better-sqlite3-layer-nodejs20-${ARCH}.zip .
 
 # Sobrescrever o ENTRYPOINT da imagem base
 ENTRYPOINT []

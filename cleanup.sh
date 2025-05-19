@@ -11,6 +11,10 @@ echo "============================================"
 echo "🧹 Starting cleanup process..."
 echo "============================================"
 
+# Clean local build artifacts
+echo "🧹 Cleaning local build artifacts..."
+rm -rf dist/*.zip
+
 for region in "${REGIONS[@]}"; do
     echo "🌎 Processing region: ${region}"
 
@@ -46,6 +50,22 @@ if [ -f "layer_versions.json" ]; then
     echo "🧹 Cleaning layer_versions.json"
     echo "{}" > layer_versions.json
 fi
+
+# Clean Docker images if any exist
+echo "🧹 Cleaning Docker images..."
+for version in "${NODE_VERSIONS[@]}"; do
+    # Check for x86_64 images
+    if docker images | grep -q "better-sqlite3-builder:nodejs${version}-x86_64"; then
+        echo "  🗑️  Removing image: better-sqlite3-builder:nodejs${version}-x86_64"
+        docker rmi "better-sqlite3-builder:nodejs${version}-x86_64"
+    fi
+    
+    # Check for arm64 images
+    if docker images | grep -q "better-sqlite3-builder:nodejs${version}-arm64"; then
+        echo "  🗑️  Removing image: better-sqlite3-builder:nodejs${version}-arm64"
+        docker rmi "better-sqlite3-builder:nodejs${version}-arm64"
+    fi
+done
 
 echo "============================================"
 echo "✅ Cleanup completed!"
